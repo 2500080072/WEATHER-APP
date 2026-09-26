@@ -1,1 +1,2 @@
 The Weather App provides real-time weather information for locations, including temperature, humidity, wind speed, rainfall, and forecasts. It offers severe weather alerts, interactive maps, and location-based customization. Personalized recommendations and weather tips help users plan travel, activities, clothing, and daily routines effectively.
+https://www.linkedin.com/pulse/weather-sphere-real-time-monitoring-intelligent-system-sai-kiran-0bvsf
