@@ -1,0 +1,37 @@
+<html>
+<body style="background-color:white">
+
+<h2>Student Management</h2>
+
+<input id="n" placeholder="Student Name">
+<input id="c" placeholder="Course">
+<input id="m" placeholder="Marks">
+
+<button onclick="add()">Add</button>
+<button onclick="del()">Delete</button>
+
+<table border="1" id="t">
+<tr>
+<th>Name</th>
+<th>Course</th>
+<th>Marks</th>
+</tr>
+</table>
+
+<script>
+function add() {
+let r = t.insertRow();
+r.insertCell(0).innerHTML = n.value;
+r.insertCell(1).innerHTML = c.value;
+r.insertCell(2).innerHTML = m.value;
+}
+
+function del() {
+if (t.rows.length > 1)
+t.deleteRow(t.rows.length - 1);
+}
+</script>
+
+</body>
+</html>
+
