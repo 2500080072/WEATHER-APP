@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Cards</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: darkblue;
+        }
+
+        .form {
+            background: white;
+            padding: 20px;
+            margin: 20px auto;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px gray;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .add {
+            background-color: green;
+        }
+
+        .delete {
+            background-color: red;
+        }
+
+        .refresh {
+            background-color: blue;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: white;
+            width: 220px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px gray;
+            border-top: 5px solid blue;
+        }
+
+        .card h2 {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Teacher Details</h1>
+
+    <!-- Enter Teacher Details -->
+    <div class="form">
+
+        <h2>Add Teacher</h2>
+
+        <input type="text" id="name" placeholder="Enter Teacher Name">
+
+        <input type="text" id="subject" placeholder="Enter Subject">
+
+        <input type="number" id="experience" placeholder="Enter Experience">
+
+        <br>
+
+        <button class="add" onclick="addTeacher()">Add Teacher</button>
+
+        <button class="refresh" onclick="refreshTeachers()">Refresh</button>
+
+    </div>
+
+    <!-- Display Teacher Cards -->
+    <div class="container" id="teacherContainer"></div>
+
+    <script>
+
+        // Teacher Details
+        let teachers = [
+            {
+                id: 1,
+                name: "Ramesh",
+                subject: "Java",
+                experience: 5
+            },
+            {
+                id: 2,
+                name: "Suresh",
+                subject: "Python",
+                experience: 8
+            },
+            {
+                id: 3,
+                name: "Mahesh",
+                subject: "Mathematics",
+                experience: 10
+            }
+        ];
+
+        // Teacher Card Component using Props
+        function TeacherCard(props) {
+            return `
+                <div class="card">
+                    <h2>${props.name}</h2>
+                    <p><b>Subject:</b> ${props.subject}</p>
+                    <p><b>Experience:</b> ${props.experience} Years</p>
+
+                    <button class="delete"
+                    onclick="deleteTeacher(${props.id})">
+                    Delete
+                    </button>
+                </div>
+            `;
+        }
+
+        // Display Teachers
+        function displayTeachers() {
+
+            const container = document.getElementById("teacherContainer");
+
+            container.innerHTML = "";
+
+            teachers.forEach(teacher => {
+                container.innerHTML += TeacherCard(teacher);
+            });
+
+        }
+
+        // Add Teacher
+        function addTeacher() {
+
+            let name = document.getElementById("name").value.trim();
+            let subject = document.getElementById("subject").value.trim();
+            let experience = document.getElementById("experience").value;
+
+            if (name === "" || subject === "" || experience === "") {
+                alert("Please enter all details!");
+                return;
+            }
+
+            if (Number(experience) < 0) {
+                alert("Experience cannot be negative!");
+                return;
+            }
+
+            let newTeacher = {
+                id: Date.now(),
+                name: name,
+                subject: subject,
+                experience: experience
+            };
+
+            teachers.push(newTeacher);
+
+            displayTeachers();
+
+            document.getElementById("name").value = "";
+            document.getElementById("subject").value = "";
+            document.getElementById("experience").value = "";
+
+        }
+
+        // Delete Teacher
+        function deleteTeacher(id) {
+
+            teachers = teachers.filter(teacher => teacher.id !== id);
+
+            displayTeachers();
+
+        }
+
+        // Refresh Teachers
+        function refreshTeachers() {
+
+            teachers = [
+                {
+                    id: 1,
+                    name: "Ramesh",
+                    subject: "Java",
+                    experience: 5
+                },
+                {
+                    id: 2,
+                    name: "Suresh",
+                    subject: "Python",
+                    experience: 8
+                },
+                {
+                    id: 3,
+                    name: "Mahesh",
+                    subject: "Mathematics",
+                    experience: 10
+                }
+            ];
+
+            displayTeachers();
+
+        }
+
+        // Initial Display
+        displayTeachers();
+
+    </script>
+
+</body>
+</html>
